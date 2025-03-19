@@ -103,14 +103,6 @@ Both models' performances are visualized through scatter plots comparing actual 
 - Explore other regression models or ensemble methods to potentially improve performance.
 - Investigate the impact of including advanced in-game metrics and contextual information.
 
-## Credits
-
-Developed by [Your Name]. Special thanks to the open-source community for providing the tools and libraries that made this project possible.
-
 ## License
 
 This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
-
----
-
-Feel free to modify this README as necessary to match any additional details or changes in your project!
