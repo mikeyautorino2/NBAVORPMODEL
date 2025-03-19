@@ -1,108 +1,102 @@
 # NBA VORP Prediction Model
 
-This project was developed over break to analyze NBA player performance by predicting the Value Over Replacement Player (VORP) metric. Using a blend of exploratory data analysis (EDA) and machine learning techniques, the project investigates how various player statistics and in-game metrics relate to VORP, ultimately building predictive models with Lasso and Ridge regression.
-
-## Overview
-
-The primary objectives of this project are to:
-- **Explore the Data:**  
-  Conduct an initial EDA, including visualizing the distribution of VORP, investigating relationships with playing time, win shares, player efficiency rating, and other features.
-- **Preprocess and Clean the Data:**  
-  Map categorical data (e.g., player positions) to numerical values, handle outliers with the interquartile range (IQR) method, and perform scaling.
-- **Feature Selection & Model Building:**  
-  Use Lasso regression with cross-validation to identify key drivers of VORP. Then, build both Lasso and Ridge regression models to predict VORP on a test set.
-- **Model Evaluation:**  
-  Evaluate model performance using R², mean absolute error (MAE), mean squared error (MSE), and root mean squared error (RMSE).
-
-## Technologies Used
-
-- **Python 3.x**
-- **Data Manipulation:** `pandas`, `numpy`
-- **Statistical Analysis:** `scipy`
-- **Machine Learning:** `scikit-learn`
-- **Visualization:** `matplotlib`, `seaborn`
+This project explores and predicts NBA player performance using the Value Over Replacement Player (VORP) metric. It combines data collection, exploratory analysis, and model building (with Lasso and Ridge regression) to identify key drivers of player value.
 
 ## Repository Structure
 
 ```
 .
-├── README.md           # This file
-├── nbavorp_model.py    # Main Python script/notebook containing the code
-└── requirements.txt    # List of required packages
+├── .vscode/              # VS Code configuration files
+├── analysis/             # Jupyter notebooks or Python scripts for analysis
+│   └── playeranalysis.ipynb
+├── sklearn-env/          # (Optional) Environment-related files for scikit-learn
+├── data/
+│   └── output.csv        # Example dataset or processed data
+├── scripts/
+│   └── gettingdata.py    # Script to fetch or preprocess raw data
+└── README.md             # Project documentation
 ```
 
-*If your project is organized into different files or notebooks, adjust this structure accordingly.*
+### Key Files
+
+- **analysis/playeranalysis.ipynb:**  
+  Main Jupyter notebook with exploratory data analysis, data preprocessing, and model building.
+
+- **scripts/gettingdata.py:**  
+  Python script for fetching, cleaning, or transforming raw data into a usable format.
+
+- **data/output.csv:**  
+  A CSV file containing the processed or final dataset used for analysis.
+
+## Overview & Objectives
+
+1. **Data Collection and Preparation:**  
+   - Gather raw NBA player data (e.g., from an API or web scraping).  
+   - Clean and preprocess data (handle missing values, map positions, manage outliers, etc.).
+
+2. **Exploratory Data Analysis (EDA):**  
+   - Visualize distributions (e.g., VORP distribution, correlation heatmaps).  
+   - Investigate relationships between key metrics (e.g., minutes played, win shares, PER).
+
+3. **Model Building and Evaluation:**  
+   - Use **Lasso** (with cross-validation) to identify the most important features contributing to VORP.  
+   - Apply **Ridge** regression with hyperparameter tuning (GridSearchCV) to optimize performance.  
+   - Evaluate models using R², MAE, MSE, and RMSE, and visualize predicted vs. actual VORP.
+
+4. **Feature Importance & Insights:**  
+   - Identify the key drivers of VORP.  
+   - Provide actionable insights into how specific metrics (e.g., PER, minutes played, usage rate) influence player value.
 
 ## Getting Started
 
 ### Prerequisites
 
-Make sure you have Python 3.x installed. The project relies on several Python libraries. You can install them using pip:
+- **Python 3.x**  
+- **Libraries:** `pandas`, `numpy`, `scipy`, `scikit-learn`, `matplotlib`, `seaborn`
 
+Install the required packages:
 ```bash
 pip install pandas numpy scipy scikit-learn matplotlib seaborn
 ```
 
-Alternatively, if you have a `requirements.txt` file, install dependencies with:
-
+If using a virtual environment (e.g., `sklearn-env/`), activate it before installing packages:
 ```bash
+source sklearn-env/bin/activate
 pip install -r requirements.txt
 ```
 
-### Running the Code
+### Running the Project
 
-If your project is contained in a single script or notebook, you can run it as follows:
+1. **Data Preparation:**  
+   - Run `scripts/gettingdata.py` to fetch or preprocess raw data.  
+   - Ensure `output.csv` (or your final dataset) is saved in the `data/` directory.
 
-- **Python Script:**  
-  ```bash
-  python nbavorp_model.py
-  ```
-
-- **Jupyter Notebook:**  
-  Open the notebook in Jupyter and run the cells sequentially:
-  ```bash
-  jupyter notebook nbavorp_model.ipynb
-  ```
-
-## Code Breakdown
-
-### Data Preprocessing and EDA
-
-- **Position Mapping:**  
-  The code converts player positions from categorical strings (e.g., "PG", "SG") to numerical values to better suit model training.
-  
-- **Visualization:**  
-  Various plots are generated to explore the distribution of VORP, relationships between minutes played and VORP, as well as correlations among numerical features.
-
-- **Outlier Detection:**  
-  An IQR-based approach is used to flag and later examine outliers in the VORP data.
-
-### Model Building
-
-- **Lasso Regression:**  
-  A `LassoCV` model is used to determine the optimal regularization parameter (alpha) and to select significant features. Key drivers of VORP are visualized via a bar chart.
-
-- **Ridge Regression:**  
-  A grid search with cross-validation (`GridSearchCV`) is conducted to find the best alpha for Ridge regression, followed by evaluation using metrics like R², MAE, MSE, and RMSE.
-
-### Model Evaluation
-
-Both models' performances are visualized through scatter plots comparing actual vs. predicted VORP values, with the Ridge regression model showing promising results.
+2. **Analysis & Model Training:**  
+   - Open and run `analysis/playeranalysis.ipynb` in Jupyter:
+     ```bash
+     jupyter notebook analysis/playeranalysis.ipynb
+     ```
+   - Follow the notebook cells to explore data, build models, and visualize results.
 
 ## Results
 
 - **Lasso Regression:**  
-  The best alpha and key feature coefficients were determined, offering insight into which player metrics most influence VORP.
-  
+  - Identified top features that drive VORP (e.g., usage rate, minutes played, etc.).  
+  - Used cross-validation to find an optimal alpha value.
+
 - **Ridge Regression:**  
-  After hyperparameter tuning, the Ridge model achieved a test R² of approximately 0.71, indicating a solid predictive performance.
+  - Used grid search to find the best alpha, yielding a strong R² on the test set.  
+  - Visualized predicted vs. actual VORP values, showing a decent fit.
 
-## Future Work
+## Future Enhancements
 
-- Experiment with additional feature engineering and selection techniques.
-- Explore other regression models or ensemble methods to potentially improve performance.
-- Investigate the impact of including advanced in-game metrics and contextual information.
+- **Add More Features:**  
+  - Incorporate additional advanced stats (e.g., RAPTOR, BPM, etc.) to refine the model.
+- **Try Other Models:**  
+  - Experiment with ensemble methods (Random Forest, Gradient Boosting) or deep learning for potential performance gains.
+- **Longitudinal Analysis:**  
+  - Investigate changes in VORP over multiple seasons to spot trends and project career trajectories.
 
-## License
+## Contributing
 
-This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+Contributions are welcome! Feel free to open an issue or submit a pull request if you have any suggestions or improvements.
