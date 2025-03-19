@@ -1,7 +1,3 @@
-Below is a sample README you can use for your project:
-
----
-
 # NBA VORP Prediction Model
 
 This project was developed over break to analyze NBA player performance by predicting the Value Over Replacement Player (VORP) metric. Using a blend of exploratory data analysis (EDA) and machine learning techniques, the project investigates how various player statistics and in-game metrics relate to VORP, ultimately building predictive models with Lasso and Ridge regression.
